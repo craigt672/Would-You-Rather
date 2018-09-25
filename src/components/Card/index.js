@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import { Container, Content, Header, Avatar } from "./styles";
+import { connect } from "react-redux";
 
 class Card extends Component {
-  state = {};
   render() {
+    const { avatarUrl, title, image } = this.props;
+    console.log("Avatar-Url:", avatarUrl);
     return (
       <Container>
         <Header>
-          <h3>{this.props.title}</h3>
+          <h3>{title}</h3>
         </Header>
         <Content>
           <Avatar>
-            <img src="https://avataaars.io/?avatarStyle=Circle&topType=ShortHairDreads01&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=Black&eyeType=Default&eyebrowType=RaisedExcited&mouthType=Smile&skinColor=Brown" />
+            <img src={image} />
           </Avatar>
           {this.props.children}
         </Content>
@@ -20,4 +22,9 @@ class Card extends Component {
   }
 }
 
-export default Card;
+const mapStateToProps = ({ users }, { author }) => ({
+  avatarUrl: users[author].avatarURL,
+  name: users[author].name
+});
+
+export default connect(mapStateToProps)(Card);

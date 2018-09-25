@@ -24,3 +24,17 @@ export const Title = styled.h2`
   margin: 0;
   font-weight: bold;
 `;
+
+export const Button = styled.button`
+  width: 100%;
+  border: 2px solid #04c78bfa;
+  font-size: 1em;
+  padding: 10px;
+  color: #04c78bfa;
+  border-radius: 20px;
+  :hover {
+    background: #04c78bfa;
+    color: white;
+    cursor: pointer;
+  }
+`;

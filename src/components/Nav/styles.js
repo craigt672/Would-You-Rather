@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const Container = styled.nav`
-  border-bottom: ${props => (props.borderBottom ? "1px solid gray" : "none")};
+  border-bottom: ${props =>
+    props.borderBottom ? "1px solid #04c78bfa" : "none"};
 `;
 
 export const LinkGroup = styled.ul`
   display: flex;
   padding: 0;
   margin: 0;
-  /* padding: 5px 150px 0 150px; */
   color: gray;
   justify-content: center;
 `;
@@ -20,8 +20,8 @@ export const NavLinkGroup = styled.div`
 `;
 
 export const LinkNav = styled.li`
+  display: flex;
   list-style: none;
-  padding: 10px 15px;
   margin: 0;
   border: 1px solid #757575;
   border-top-left-radius: 5px;
@@ -33,7 +33,7 @@ export const LinkNav = styled.li`
     color: inherit;
   }
   :hover {
-    background: #757575;
+    background: #04c78bfa;
     color: white;
     cursor: pointer;
   }

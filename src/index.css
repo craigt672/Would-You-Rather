@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.active-link {
+  background: #04c78bfa;
+  color: white !important;
+}

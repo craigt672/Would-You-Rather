@@ -2,14 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { Container, LinkGroup, NavLinkGroup, LinkNav } from "./styles";
 
-function formatLink(link) {
-  return link
-    .toLowerCase()
-    .trim()
-    .split(" ")
-    .join("");
-}
-
 const Nav = props => {
   return (
     <Container borderBottom={props.borderBottom}>
@@ -17,9 +9,14 @@ const Nav = props => {
         <NavLinkGroup>
           {props.links.map(link => {
             return (
-              <LinkNav>
-                <NavLink exact to={`/${formatLink(link)}`}>
-                  {link}
+              <LinkNav key={link.name}>
+                <NavLink
+                  exact={!!props.exact}
+                  to={link.path}
+                  style={{ padding: "10px 15px" }}
+                  activeClassName="active-link"
+                >
+                  {link.name}
                 </NavLink>
               </LinkNav>
             );
