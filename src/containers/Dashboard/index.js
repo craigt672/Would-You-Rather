@@ -2,13 +2,8 @@ import React, { Component } from "react";
 import Nav from "../../components/Nav/index";
 import Card from "../../components/Card/index";
 import { withRouter } from "react-router-dom";
-import {
-  Container,
-  QuestionsContainer,
-  QuestionBox,
-  Title,
-  Button
-} from "./styles";
+import { Container } from "./styles";
+import { QuestionsContainer, QuestionBox, Title, Button } from "./styles";
 import { connect } from "react-redux";
 
 class Dashboard extends Component {

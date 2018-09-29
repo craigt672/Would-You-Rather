@@ -92,7 +92,7 @@ class App extends Component {
 }
 
 const mapStateToProps = ({ users, questions, authedUser }) => ({
-  users,
+  users: Object.values(users),
   questions: Object.values(questions).sort((a, b) => b.timestamp - a.timestamp),
   authedUser: "craigthomas"
 });

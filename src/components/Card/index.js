@@ -1,11 +1,14 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Container, Content, Header, Avatar } from "./styles";
-import { connect } from "react-redux";
 
-class Card extends Component {
+export default class Card extends Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired
+  };
   render() {
-    const { avatarUrl, title, image } = this.props;
-    console.log("Avatar-Url:", avatarUrl);
+    const { title, image } = this.props;
     return (
       <Container>
         <Header>
@@ -21,10 +24,3 @@ class Card extends Component {
     );
   }
 }
-
-const mapStateToProps = ({ users }, { author }) => ({
-  avatarUrl: users[author].avatarURL,
-  name: users[author].name
-});
-
-export default connect(mapStateToProps)(Card);

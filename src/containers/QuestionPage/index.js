@@ -5,6 +5,7 @@ import {
   Container,
   QuestionsContainer,
   QuestionBox,
+  Button,
   Title
 } from "../Dashboard/styles";
 import { connect } from "react-redux";
@@ -15,7 +16,7 @@ class QuestionPage extends Component {
     const { users, questions, match } = this.props;
     const { questionId } = match.params;
     const question = questions[questionId];
-    console.log(this.props);
+    console.log(question);
     return (
       <div style={{ maxWidth: "600px", margin: "20px auto" }}>
         <Card
@@ -27,8 +28,18 @@ class QuestionPage extends Component {
         >
           <QuestionBox>
             <Title>Results:</Title>
-            <p>{`Would you rather ${question.optionOne.text}?`}</p>
-            <p>{`Would you rather ${question.optionTwo.text}?`}</p>
+            <form action="">
+              <p>
+                <input type="checkbox" name="optionOne" />
+                {`Would you rather ${question.optionOne.text}?`}
+              </p>
+
+              <p>
+                <input type="checkbox" name="optionTwo" />
+                {`Would you rather ${question.optionTwo.text}?`}
+              </p>
+              <Button>Submit</Button>
+            </form>
           </QuestionBox>
         </Card>
       </div>
