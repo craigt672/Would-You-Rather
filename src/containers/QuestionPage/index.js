@@ -9,6 +9,7 @@ import {
   Title
 } from "../Dashboard/styles";
 import { connect } from "react-redux";
+import { submitVote } from "../../actions/questions";
 
 class QuestionPage extends Component {
   state = {
@@ -22,9 +23,12 @@ class QuestionPage extends Component {
   };
 
   submitHandler = () => {
-    const { users, questions, match } = this.props;
+    const { authedUser, match } = this.props;
     const { questionId } = match.params;
-    const question = questions[questionId];
+    const option = this.state.selectedOption;
+
+    this.props.dispatch(submitVote(authedUser, questionId, option));
+    this.props.history.push("/dashboard");
   };
 
   render() {
@@ -73,8 +77,9 @@ class QuestionPage extends Component {
   }
 }
 
-const mapStateToProps = ({ users, questions }) => ({
+const mapStateToProps = ({ users, questions, authedUser }) => ({
   questions,
-  users
+  users,
+  authedUser
 });
 export default withRouter(connect(mapStateToProps)(QuestionPage));

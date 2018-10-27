@@ -6,6 +6,11 @@ import { setAuthedUser } from "../../actions/authedUser";
 import { connect } from "react-redux";
 
 const Nav = props => {
+  const logoutHandler = () => {
+    props.history.push("/logout");
+    props.dispatch(setAuthedUser(null));
+  };
+
   return (
     <Container fixed={!!props.authedUser} borderBottom={props.borderBottom}>
       <LinkGroup user>
@@ -31,10 +36,7 @@ const Nav = props => {
             </Avatar>
             <h3>{`Hi ${props.users[props.authedUser].name.split(" ")[0]}`}</h3>
             <LinkNav user>
-              <NavLink
-                to="/"
-                onClick={() => this.props.dispatch(setAuthedUser(null))}
-              >
+              <NavLink to="/" onClick={logoutHandler}>
                 LOG OUT
               </NavLink>
             </LinkNav>

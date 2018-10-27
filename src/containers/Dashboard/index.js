@@ -16,8 +16,8 @@ class Dashboard extends Component {
         <Nav
           exact
           links={[
-            { name: "Unanswered Questions", path: "/Dashboard/unanswered" },
-            { name: "Answered Questions", path: "/Dashboard/answered" }
+            { name: "Unanswered Questions", path: "/dashboard/unanswered" },
+            { name: "Answered Questions", path: "/dashboard/answered" }
           ]}
         />
         <QuestionsContainer>
@@ -36,7 +36,7 @@ class Dashboard extends Component {
                   .join(" ")}...`}</p>
                 <Button
                   onClick={() =>
-                    this.props.history.push(`/Questions/${question.id}`)
+                    this.props.history.push(`/questions/${question.id}`)
                   }
                 >
                   View Post

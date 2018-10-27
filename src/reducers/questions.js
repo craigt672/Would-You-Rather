@@ -1,4 +1,4 @@
-import { RECIEVE_QUESTIONS } from "../actions/questions";
+import { RECIEVE_QUESTIONS, SUBMIT_VOTE } from "../actions/questions";
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -6,6 +6,19 @@ export default (state = {}, action) => {
       return {
         ...state,
         ...action.questions
+      };
+    case SUBMIT_VOTE:
+      return {
+        ...state,
+        [action.questionId]: {
+          ...state[action.questionId],
+          [state[action.questionId][action.option]]: {
+            ...state[action.questionId][action.option],
+            votes: state[action.questionId][action.option].votes.push(
+              action.userId
+            )
+          }
+        }
       };
     default:
       return state;

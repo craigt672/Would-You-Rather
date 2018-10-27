@@ -40,9 +40,9 @@ class App extends Component {
           <Nav
             borderBottom
             links={[
-              { name: "Home", path: "/Dashboard" },
-              { name: "New Question", path: "/NewQuestion" },
-              { name: "Leader Board", path: "/LeaderBoard" }
+              { name: "Home", path: "/dashboard" },
+              { name: "New Question", path: "/newquestion" },
+              { name: "Leader Board", path: "/leaderBoard" }
             ]}
             authedUser={authedUser}
           />
@@ -52,41 +52,40 @@ class App extends Component {
               path="/"
               render={() =>
                 !!authedUser ? (
-                  <Redirect push to="/Dashboard/unanswered" />
+                  <Redirect push to="/dashboard/unanswered" />
                 ) : (
                   <LoginPage />
                 )
               }
             />
 
-            <Route exact path="/Login" render={() => <LoginPage />} />
-
             <Route
               exact
-              path="/Questions/:questionId"
+              path="/questions/:questionId"
               render={() => <QuestionPage />}
             />
 
-            <Route exact path="/Dashboard" render={() => <Redirect to="/" />} />
+            <Route exact path="/dashboard" render={() => <Redirect to="/" />} />
 
             <Route
               exact
-              path="/Dashboard/unanswered"
+              path="/dashboard/unanswered"
               render={() => <Dashboard questions={unAnswered} />}
             />
 
             <Route
               exact
-              path="/Dashboard/answered"
+              path="/dashboard/answered"
               render={() => <Dashboard questions={answered} />}
             />
 
             <Route
               exact
-              path="/Leaderboard"
+              path="/leaderboard"
               render={() => <LeaderBoard users={users} />}
             />
 
+            <Route exact path="/login" render={() => <LoginPage />} />
             <Route component={noMatch} />
           </Switch>
         </Container>
