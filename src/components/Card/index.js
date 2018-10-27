@@ -8,16 +8,18 @@ export default class Card extends Component {
     image: PropTypes.string.isRequired
   };
   render() {
-    const { title, image } = this.props;
+    const { title, image, column } = this.props;
     return (
       <Container>
         <Header>
           <h3>{title}</h3>
         </Header>
-        <Content>
-          <Avatar>
-            <img src={image} />
-          </Avatar>
+        <Content column={!!column}>
+          {image && (
+            <Avatar>
+              <img src={image} />
+            </Avatar>
+          )}
           {this.props.children}
         </Content>
       </Container>

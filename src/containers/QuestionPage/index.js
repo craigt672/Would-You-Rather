@@ -11,7 +11,22 @@ import {
 import { connect } from "react-redux";
 
 class QuestionPage extends Component {
-  state = {};
+  state = {
+    selectedOption: "optionOne"
+  };
+
+  handleOptionChange = e => {
+    this.setState({
+      selectedOption: e.target.value
+    });
+  };
+
+  submitHandler = () => {
+    const { users, questions, match } = this.props;
+    const { questionId } = match.params;
+    const question = questions[questionId];
+  };
+
   render() {
     const { users, questions, match } = this.props;
     const { questionId } = match.params;
@@ -28,16 +43,27 @@ class QuestionPage extends Component {
         >
           <QuestionBox>
             <Title>Results:</Title>
-            <form action="">
-              <p>
-                <input type="checkbox" name="optionOne" />
+            <form onSubmit={this.submitHandler}>
+              <label>
+                <input
+                  type="radio"
+                  value="optionOne"
+                  name="optionOne"
+                  checked={this.state.selectedOption === "optionOne"}
+                  onChange={this.handleOptionChange}
+                />
                 {`Would you rather ${question.optionOne.text}?`}
-              </p>
-
-              <p>
-                <input type="checkbox" name="optionTwo" />
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="optionTwo"
+                  name="optionTwo"
+                  checked={this.state.selectedOption === "optionTwo"}
+                  onChange={this.handleOptionChange}
+                />
                 {`Would you rather ${question.optionTwo.text}?`}
-              </p>
+              </label>
               <Button>Submit</Button>
             </form>
           </QuestionBox>

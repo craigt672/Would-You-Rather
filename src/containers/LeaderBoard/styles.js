@@ -1,9 +1,18 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  max-width: 700px;
+  max-width: 1000px;
   margin: 100px auto;
   box-sizing: border-box;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 10px 50px;
+  > h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #04c78bfa;
+    text-transform: uppercase;
+  }
 `;
 
 export const ScoreBox = styled.div`
@@ -32,7 +41,7 @@ export const TotalScoreBox = styled.div`
   }
   > div {
     > h3 {
-      margin: 30px auto 0 auto;
+      margin: 10px auto 20px auto;
       width: 20px;
       height: 20px;
       background: #04c78bfa;

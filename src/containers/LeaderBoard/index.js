@@ -26,6 +26,7 @@ export default class LeaderBoard extends Component {
 
     return (
       <Container>
+        <h1>Leader Board</h1>
         {this.props.users.map((user, idx) => (
           <Card
             key={user.id}

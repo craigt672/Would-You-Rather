@@ -18,6 +18,17 @@ export const QuestionBox = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+
+  > form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: left;
+    padding: 10px;
+    > label {
+      padding: 10px;
+    }
+  }
 `;
 
 export const Title = styled.h2`

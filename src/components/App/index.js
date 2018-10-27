@@ -23,12 +23,12 @@ class App extends Component {
 
   render() {
     console.log(this.props);
-    const { authedUser: loggedIn, questions, users } = this.props;
+    const { authedUser, questions, users } = this.props;
 
     function containsAuthor(question) {
       return (
-        question.optionOne.votes.includes(loggedIn) ||
-        question.optionTwo.votes.includes(loggedIn)
+        question.optionOne.votes.includes(authedUser) ||
+        question.optionTwo.votes.includes(authedUser)
       );
     }
     const answered = questions.filter(question => containsAuthor(question));
@@ -44,20 +44,22 @@ class App extends Component {
               { name: "New Question", path: "/NewQuestion" },
               { name: "Leader Board", path: "/LeaderBoard" }
             ]}
-            authedUser={loggedIn}
+            authedUser={authedUser}
           />
           <Switch>
             <Route
               exact
               path="/"
               render={() =>
-                !!loggedIn ? (
+                !!authedUser ? (
                   <Redirect push to="/Dashboard/unanswered" />
                 ) : (
                   <LoginPage />
                 )
               }
             />
+
+            <Route exact path="/Login" render={() => <LoginPage />} />
 
             <Route
               exact
@@ -66,11 +68,13 @@ class App extends Component {
             />
 
             <Route exact path="/Dashboard" render={() => <Redirect to="/" />} />
+
             <Route
               exact
               path="/Dashboard/unanswered"
               render={() => <Dashboard questions={unAnswered} />}
             />
+
             <Route
               exact
               path="/Dashboard/answered"
@@ -94,7 +98,7 @@ class App extends Component {
 const mapStateToProps = ({ users, questions, authedUser }) => ({
   users: Object.values(users),
   questions: Object.values(questions).sort((a, b) => b.timestamp - a.timestamp),
-  authedUser: "craigthomas"
+  authedUser
 });
 
 export default connect(mapStateToProps)(App);

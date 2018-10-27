@@ -4,6 +4,7 @@ export const Container = styled.div`
   border: 1px solid gray;
   border-radius: 5px;
   max-width: 800px;
+  margin: 0 auto;
   margin-bottom: 15px;
 `;
 
@@ -20,6 +21,8 @@ export const Header = styled.div`
 
 export const Content = styled.ul`
   display: flex;
+  flex-direction: ${props => (props.column ? "column" : "row")};
+  align-items: center;
   justify-content: space-around;
   margin: 0;
   padding: 20px;
@@ -27,10 +30,10 @@ export const Content = styled.ul`
 
 export const Avatar = styled.li`
   display: flex;
-  width: 200px;
-  height: 150px;
+  width: ${props => (props.small ? "48px" : "200px")};
+  height: ${props => (props.small ? "36px" : "150px")};
   justify-content: flex-start;
-  border-right: 1px solid gray;
+  border-right: ${props => (props.noBorder ? "none" : "1px solid gray")};
   > img {
     width: 100%;
   }
