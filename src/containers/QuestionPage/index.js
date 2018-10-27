@@ -10,6 +10,7 @@ import {
 } from "../Dashboard/styles";
 import { connect } from "react-redux";
 import { submitVote } from "../../actions/questions";
+import { saveAnswer } from "../../actions/users";
 
 class QuestionPage extends Component {
   state = {
@@ -28,6 +29,7 @@ class QuestionPage extends Component {
     const option = this.state.selectedOption;
 
     this.props.dispatch(submitVote(authedUser, questionId, option));
+    this.props.dispatch(saveAnswer(authedUser, questionId, option));
     this.props.history.push("/dashboard");
   };
 
