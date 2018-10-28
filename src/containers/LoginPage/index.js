@@ -26,6 +26,7 @@ class LoginPage extends Component {
     return (
       <Container>
         <Card column title="Login">
+          <h2>Would You Rather?</h2>
           <form onSubmit={this.loginHandler}>
             <img src="https://image.ibb.co/j4HU3e/react_redux.jpg" />
             <select onChange={this.changeUserHandler} value={this.state.userId}>

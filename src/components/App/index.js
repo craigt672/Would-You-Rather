@@ -14,6 +14,8 @@ import handleInitialData from "../../actions/shared";
 import { Container } from "./styles";
 import { connect } from "react-redux";
 import QuestionPage from "../../containers/QuestionPage";
+import { containsAuthor } from "../../utils/helpers";
+import NewQuestion from "../../containers/NewQuestion";
 
 class App extends Component {
   componentDidMount() {
@@ -25,14 +27,12 @@ class App extends Component {
     console.log(this.props);
     const { authedUser, questions, users } = this.props;
 
-    function containsAuthor(question) {
-      return (
-        question.optionOne.votes.includes(authedUser) ||
-        question.optionTwo.votes.includes(authedUser)
-      );
-    }
-    const answered = questions.filter(question => containsAuthor(question));
-    const unAnswered = questions.filter(question => !containsAuthor(question));
+    const answered = questions.filter(question =>
+      containsAuthor(question, authedUser)
+    );
+    const unAnswered = questions.filter(
+      question => !containsAuthor(question, authedUser)
+    );
 
     return (
       <Router>
@@ -41,8 +41,8 @@ class App extends Component {
             borderBottom
             links={[
               { name: "Home", path: "/dashboard" },
-              { name: "New Question", path: "/newquestion" },
-              { name: "Leader Board", path: "/leaderBoard" }
+              { name: "New Question", path: "/add" },
+              { name: "Leader Board", path: "/leaderboard" }
             ]}
             authedUser={authedUser}
           />
@@ -62,7 +62,17 @@ class App extends Component {
             <Route
               exact
               path="/questions/:questionId"
-              render={() => <QuestionPage />}
+              render={() =>
+                !!authedUser ? <QuestionPage /> : <Redirect push to="/" />
+              }
+            />
+
+            <Route
+              exact
+              path="/add"
+              render={() =>
+                !!authedUser ? <NewQuestion /> : <Redirect push to="/" />
+              }
             />
 
             <Route exact path="/dashboard" render={() => <Redirect to="/" />} />
@@ -70,13 +80,25 @@ class App extends Component {
             <Route
               exact
               path="/dashboard/unanswered"
-              render={() => <Dashboard questions={unAnswered} />}
+              render={() =>
+                !!authedUser ? (
+                  <Dashboard questions={unAnswered} />
+                ) : (
+                  <LoginPage />
+                )
+              }
             />
 
             <Route
               exact
               path="/dashboard/answered"
-              render={() => <Dashboard questions={answered} />}
+              render={() =>
+                !!authedUser ? (
+                  <Dashboard answered questions={answered} />
+                ) : (
+                  <LoginPage />
+                )
+              }
             />
 
             <Route

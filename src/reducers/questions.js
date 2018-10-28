@@ -1,4 +1,8 @@
-import { RECIEVE_QUESTIONS, SUBMIT_VOTE } from "../actions/questions";
+import {
+  RECIEVE_QUESTIONS,
+  ADD_VOTE,
+  ADD_QUESTION
+} from "../actions/questions";
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -7,7 +11,12 @@ export default (state = {}, action) => {
         ...state,
         ...action.questions
       };
-    case SUBMIT_VOTE:
+    case ADD_QUESTION:
+      return {
+        ...state,
+        [action.question.id]: action.question
+      };
+    case ADD_VOTE:
       return {
         ...state,
         [action.questionId]: {

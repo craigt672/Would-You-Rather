@@ -38,14 +38,17 @@ export const Title = styled.h2`
 
 export const Button = styled.button`
   width: 100%;
-  border: 2px solid #04c78bfa;
+  border: ${props =>
+    props.disabled ? "2px solid gray" : "2px solid #04c78bfa"};
   font-size: 1em;
   padding: 10px;
-  color: #04c78bfa;
+  color: ${props => (props.disabled ? "#404040" : "#04c78bfa")};
   border-radius: 20px;
+  cursor: ${props => (props.disabled ? "not-allowed" : "pointer")} !important;
+  background: ${props => (props.disabled ? "gray" : "white")};
   :hover {
-    background: #04c78bfa;
-    color: white;
+    background: ${props => (props.disabled ? "gray" : "#04c78bfa")};
+    color: white
     cursor: pointer;
   }
 `;

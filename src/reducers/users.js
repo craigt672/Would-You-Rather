@@ -1,4 +1,5 @@
 import { RECEIVE_USERS, SUBMIT_ANSWER } from "../actions/users";
+import { ADD_QUESTION } from "../actions/questions";
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -6,6 +7,16 @@ export default (state = {}, action) => {
       return {
         ...state,
         ...action.users
+      };
+    case ADD_QUESTION:
+      return {
+        ...state,
+        [action.question.author]: {
+          ...state[action.question.author],
+          questions: state[action.question.author].questions.concat([
+            action.question.id
+          ])
+        }
       };
 
     case SUBMIT_ANSWER:
