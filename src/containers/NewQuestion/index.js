@@ -28,9 +28,8 @@ class NewQuestionPage extends Component {
     event.preventDefault();
     const { dispatch } = this.props;
     const { optionOne, optionTwo } = this.state;
-
-    dispatch(handleAddQuestion({ optionOne, optionTwo }));
     this.props.history.push("/dashboard");
+    dispatch(handleAddQuestion({ optionOne, optionTwo }));
   };
 
   render() {
