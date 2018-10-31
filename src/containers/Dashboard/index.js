@@ -10,7 +10,7 @@ class Dashboard extends Component {
   state = {};
   render() {
     console.log(this.props);
-    const { users, questions } = this.props;
+    const { users } = this.props;
     return (
       <Container>
         <Nav

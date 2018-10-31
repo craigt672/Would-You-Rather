@@ -4,6 +4,9 @@ export const Container = styled.div`
   max-width: 700px;
   margin: 100px auto;
   box-sizing: border-box;
+  h1 {
+    color: red;
+  }
   > div {
     form {
       display: flex;

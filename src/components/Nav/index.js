@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import { Avatar } from "../Card/styles";
 import { Container, LinkGroup, NavLinkGroup, LinkNav } from "./styles";
 import { setAuthedUser } from "../../actions/authedUser";
@@ -32,7 +32,7 @@ const Nav = props => {
         {props.authedUser && (
           <NavLinkGroup user>
             <Avatar noBorder small>
-              <img src={props.users[props.authedUser].avatarURL} />
+              <img alt="avatar" src={props.users[props.authedUser].avatarURL} />
             </Avatar>
             <h3>{`Hi ${props.users[props.authedUser].name.split(" ")[0]}`}</h3>
             <LinkNav user>
@@ -51,4 +51,4 @@ const mapStateToProps = ({ users }) => ({
   users
 });
 
-export default connect(mapStateToProps)(Nav);
+export default withRouter(connect(mapStateToProps)(Nav));

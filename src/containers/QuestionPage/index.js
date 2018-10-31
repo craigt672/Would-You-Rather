@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import Card from "../../components/Card/index";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { QuestionBox, Button, Title } from "../Dashboard/styles";
 import { connect } from "react-redux";
-import { addVote } from "../../actions/questions";
-import { saveAnswer } from "../../actions/users";
 import { containsAuthor } from "../../utils/helpers";
 import VoteCard from "../../components/VoteCard";
 import { handleSaveAnswer } from "../../actions/shared";
@@ -31,21 +29,31 @@ class QuestionPage extends Component {
   render() {
     const { users, questions, authedUser, match } = this.props;
     const { questionId } = match.params;
-    const question = questions[questionId];
+    const question = questions
+      .filter(question => question.id === questionId)
+      .pop();
+
+    if (!question) {
+      return <Redirect to="/404" />;
+    }
+    const user = users.filter(user => user.id === question.author).pop();
+    console.log(questions);
+    console.log(questionId);
     console.log(question);
+    console.log(this.props);
     return (
       <div style={{ maxWidth: "600px", margin: "60px auto" }}>
         <Card
           key={questionId}
-          title={`Asked by ${users[question.author].name} :`}
+          title={`Asked by ${user.name} :`}
           author={question.author}
-          image={users[question.author].avatarURL}
+          image={user.avatarURL}
           style={{ margin: "auto" }}
         >
           <QuestionBox>
-            <Title>Results:</Title>
             {containsAuthor(question, authedUser) ? (
               <div>
+                <Title>Results:</Title>
                 <VoteCard
                   voted={question.optionOne.votes.includes(authedUser)}
                   votes={question.optionOne.votes.length}
@@ -67,6 +75,7 @@ class QuestionPage extends Component {
               </div>
             ) : (
               <form onSubmit={this.submitHandler}>
+                <h2>Would you rather...</h2>
                 <label>
                   <input
                     type="radio"
@@ -75,7 +84,7 @@ class QuestionPage extends Component {
                     checked={this.state.selectedOption === "optionOne"}
                     onChange={this.handleOptionChange}
                   />
-                  {`Would you rather ${question.optionOne.text}?`}
+                  {question.optionOne.text}
                 </label>
                 <label>
                   <input
@@ -85,7 +94,7 @@ class QuestionPage extends Component {
                     checked={this.state.selectedOption === "optionTwo"}
                     onChange={this.handleOptionChange}
                   />
-                  {`Would you rather ${question.optionTwo.text}?`}
+                  {question.optionTwo.text}
                 </label>
                 <Button>Submit</Button>
               </form>
@@ -97,9 +106,8 @@ class QuestionPage extends Component {
   }
 }
 
-const mapStateToProps = ({ users, questions, authedUser }) => ({
-  questions,
-  users,
-  authedUser
-});
-export default withRouter(connect(mapStateToProps)(QuestionPage));
+// const mapStateToProps = ({ users, questions }) => ({
+//   questions,
+//   users
+// });
+export default withRouter(connect()(QuestionPage));

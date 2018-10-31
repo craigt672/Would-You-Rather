@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { Container, Content, Header, Avatar } from "./styles";
 
 export default class Card extends Component {
-  static propTypes = {
-    title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired
-  };
+  // static propTypes = {
+  //   title: PropTypes.string.isRequired,
+  //   image: PropTypes.string.isRequired
+  // };
   render() {
     const { title, image, column } = this.props;
     return (
@@ -17,7 +17,7 @@ export default class Card extends Component {
         <Content column={!!column}>
           {image && (
             <Avatar>
-              <img src={image} />
+              <img src={image} alt="avatar" />
             </Avatar>
           )}
           {this.props.children}

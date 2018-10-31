@@ -9,7 +9,7 @@ import Nav from "../Nav/index";
 import Dashboard from "../../containers/Dashboard/index";
 import LoginPage from "../../containers/LoginPage/index";
 import LeaderBoard from "../../containers/LeaderBoard/index";
-import noMatch from "../../containers/404";
+import noMatch from "../../containers/404/index";
 import handleInitialData from "../../actions/shared";
 import { Container } from "./styles";
 import { connect } from "react-redux";
@@ -54,24 +54,8 @@ class App extends Component {
                 !!authedUser ? (
                   <Redirect push to="/dashboard/unanswered" />
                 ) : (
-                  <LoginPage />
+                  <Redirect push to="/login" />
                 )
-              }
-            />
-
-            <Route
-              exact
-              path="/questions/:questionId"
-              render={() =>
-                !!authedUser ? <QuestionPage /> : <Redirect push to="/" />
-              }
-            />
-
-            <Route
-              exact
-              path="/add"
-              render={() =>
-                !!authedUser ? <NewQuestion /> : <Redirect push to="/" />
               }
             />
 
@@ -84,7 +68,7 @@ class App extends Component {
                 !!authedUser ? (
                   <Dashboard questions={unAnswered} />
                 ) : (
-                  <LoginPage />
+                  <LoginPage error="Must be logged in" />
                 )
               }
             />
@@ -96,7 +80,7 @@ class App extends Component {
                 !!authedUser ? (
                   <Dashboard answered questions={answered} />
                 ) : (
-                  <LoginPage />
+                  <LoginPage error="Must be logged in" />
                 )
               }
             />
@@ -104,10 +88,45 @@ class App extends Component {
             <Route
               exact
               path="/leaderboard"
-              render={() => <LeaderBoard users={users} />}
+              render={() =>
+                !!authedUser ? (
+                  <LeaderBoard users={users} />
+                ) : (
+                  <LoginPage error="Must be logged in" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/questions/:questionId"
+              render={() =>
+                !!authedUser ? (
+                  <QuestionPage
+                    authedUser={authedUser}
+                    questions={questions}
+                    users={users}
+                  />
+                ) : (
+                  <LoginPage error="Must be logged in" />
+                )
+              }
+            />
+
+            <Route
+              exact
+              path="/add"
+              render={() =>
+                !!authedUser ? (
+                  <NewQuestion />
+                ) : (
+                  <LoginPage error="Must be logged in" />
+                )
+              }
             />
 
             <Route exact path="/login" render={() => <LoginPage />} />
+            <Route exact path="/404" render={() => <noMatch />} />
             <Route component={noMatch} />
           </Switch>
         </Container>

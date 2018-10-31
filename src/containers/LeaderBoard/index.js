@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Container, ScoreBox, TotalScoreBox } from "./styles";
 import Card from "../../components/Card/index";
-import connect from "react-redux";
 
 export default class LeaderBoard extends Component {
   state = {};
@@ -27,7 +26,7 @@ export default class LeaderBoard extends Component {
     return (
       <Container>
         <h1>Leader Board</h1>
-        {this.props.users.map((user, idx) => (
+        {sortedUsers.map((user, idx) => (
           <Card
             key={user.id}
             image={user.avatarURL}
@@ -57,9 +56,3 @@ export default class LeaderBoard extends Component {
     );
   }
 }
-
-// const mapStateToProps = ({ users }) => ({
-//   users: Object.values.sort
-// });
-
-// connect()(LeaderBoard);

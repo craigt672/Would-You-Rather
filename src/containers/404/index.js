@@ -1,10 +1,11 @@
 import React from "react";
+import { Container } from "./styles";
 
 const noMatch = () => {
   return (
-    <div>
+    <Container>
       <h1>No Match!!</h1>
-    </div>
+    </Container>
   );
 };
 

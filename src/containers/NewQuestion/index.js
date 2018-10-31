@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import { Button } from "../Dashboard/styles";
 import { connect } from "react-redux";
 import { handleAddQuestion } from "../../actions/questions";
-import { saveAnswer } from "../../actions/users";
 import { Form } from "./styles";
 
 class NewQuestionPage extends Component {
@@ -35,7 +34,7 @@ class NewQuestionPage extends Component {
   };
 
   render() {
-    const { users, questions, authedUser, match } = this.props;
+    const { questions, match } = this.props;
     const { optionOne, optionTwo } = this.state;
     const { questionId } = match.params;
     const question = questions[questionId];
