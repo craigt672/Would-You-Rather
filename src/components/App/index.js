@@ -9,7 +9,7 @@ import Nav from "../Nav/index";
 import Dashboard from "../../containers/Dashboard/index";
 import LoginPage from "../../containers/LoginPage/index";
 import LeaderBoard from "../../containers/LeaderBoard/index";
-import noMatch from "../../containers/404/index";
+import NoMatch from "../../containers/404/index";
 import handleInitialData from "../../actions/shared";
 import { Container } from "./styles";
 import { connect } from "react-redux";
@@ -126,8 +126,7 @@ class App extends Component {
             />
 
             <Route exact path="/login" render={() => <LoginPage />} />
-            <Route exact path="/404" render={() => <noMatch />} />
-            <Route component={noMatch} />
+            <Route component={NoMatch} />
           </Switch>
         </Container>
       </Router>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "./styles";
 
-const noMatch = () => {
+const NoMatch = () => {
   return (
     <Container>
       <h1>No Match!!</h1>
@@ -9,4 +9,4 @@ const noMatch = () => {
   );
 };
 
-export default noMatch;
+export default NoMatch;
